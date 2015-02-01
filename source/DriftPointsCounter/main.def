@@ -1,0 +1,10 @@
+LIBRARY	"DriftPointsCounter"
+EXPORTS
+	Supports
+	Load
+	Unload
+	AmxLoad
+	AmxUnload
+	ProcessTick
+	OnPlayerStateChange
+	OnPlayerDisconnect
