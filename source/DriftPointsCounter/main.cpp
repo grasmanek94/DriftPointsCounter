@@ -13,6 +13,11 @@
 #include <sstream>
 
 #include <plugin.h>
+
+extern void 
+    *pAMXFunctions
+;
+
 #include <sampgdk.h>
 //-------------------------------------------//
 #undef MAX_PLAYERS
@@ -1096,11 +1101,12 @@ static cell AMX_NATIVE_CALL ResetModelLst( AMX* amx, cell* params )
 
 PLUGIN_EXPORT unsigned int PLUGIN_CALL Supports() 
 {
-	return SUPPORTS_VERSION | SUPPORTS_AMX_NATIVES | SUPPORTS_PROCESS_TICK;
+	return sampgdk::Supports() | SUPPORTS_VERSION | SUPPORTS_AMX_NATIVES | SUPPORTS_PROCESS_TICK;
 }
 
 PLUGIN_EXPORT bool PLUGIN_CALL Load( void **ppData ) 
 {
+	pAMXFunctions = ppData[PLUGIN_DATA_AMX_EXPORTS];
 	sampgdk::Load(ppData);
 	int loop = 0;
 	while(loop != MAX_PLAYERS-1)
@@ -1127,6 +1133,7 @@ PLUGIN_EXPORT bool PLUGIN_CALL Load( void **ppData )
 PLUGIN_EXPORT void PLUGIN_CALL Unload( )
 {
 	cout << "---Unloading---\r\n\tGamer_Z's Project Bundle: \r\n\t\tDrift Points Counter\r\n---UNLOADED---";
+	sampgdk::Unload();
 }
 
 AMX_NATIVE_INFO driftAMXNatives[ ] =
@@ -1221,6 +1228,7 @@ float angle = 0.0f;
 PLUGIN_EXPORT void PLUGIN_CALL
 	ProcessTick()
 {
+	sampgdk::ProcessTick();
 	if(GlobalCheck == 1)
 	{
 		if(g_Ticked == g_TickMax)
