@@ -21,5 +21,5 @@ clean:
 DriftPointsCounter: clean
 	$(GPP) $(DriftPointsCounter) *.cpp
 	$(GCC) $(DriftPointsCounter) *.c
-	$(GPP) -m32 -fshort-wchar -shared -o $(DriftPointsCounter_OUTFILE) *.o
+	$(GPP) -m32 -fshort-wchar -shared -static-libgcc -static-libstdc++ -static -o $(DriftPointsCounter_OUTFILE) *.o
 

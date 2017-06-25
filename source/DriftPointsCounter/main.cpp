@@ -12,8 +12,6 @@
 #include <limits>
 #include <sstream>
 
-#include <plugin.h>
-
 extern void 
     *pAMXFunctions
 ;
